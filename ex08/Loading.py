@@ -1,6 +1,6 @@
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def generator(items: range):
     for i in items:
@@ -20,24 +20,20 @@ def ft_tqdm(items: range) -> None:
     or infinite sequences. """
     progress = 0
     # to_print = ""
-    start = datetime.now()
+    timestamp = 0
+    start = time.time()
     if len(list(items)):
-        max = 113
+        max = 100
         to_print = ""
         for i in range(0, len(list(items))):
             # nonlocal progress
-            progress = int(i * 113 / 333)
+            progress = int(i * 100 / 333)
             # nonlocal to_print
-            if (round(i * 100 / 333)) % 100 == 0:
-                nstring = to_print.replace(to_print, str(round(i * 100 / 333))+"%|")
-            elif round(i * 100 / 333) % 10 == 0:
-                nstring = to_print.replace(to_print, ' '+str(round(i * 100 / 333))+"%|")
-            else:
-                nstring = to_print.replace(to_print, '  '+str(round(i * 100 / 333))+"%|")
+            nstring = to_print.replace(to_print, str(round(i * 100 / 333))+"%|")
             sys.stdout.flush()  # Ensures the output is flushed (especially important for buffered I/O)
 
 
-            # print("prog", int(progress * 100 / 113))
+            # print("prog", int(progress * 100 / 100))
             # sys.stdout.write("█" * progress)
             # progress_bar = '=' * int(self.ncols * (self.n / self.total))
 
@@ -45,34 +41,33 @@ def ft_tqdm(items: range) -> None:
             # sys.stdout.write(f"{nstring}")
             to_print_bar = "█"
             if i == (len(list(items)) - 1):
-                print(f"     {to_print_bar * (progress + 1)}", end="")
-                print(f"| {len(list(items))}/{len(list(items))}", end='\r')
+                print(f"{to_print_bar * (progress + 1)}", end="")
+                print(f"| {len(list(items))}/{len(list(items))}", end="")
+                end = time.time()
+                timestamp = end - start
+                print("["+str(timedelta(seconds=round(timestamp)))+"<"+str(timedelta(microseconds=(timestamp - round(timestamp))))+", "+str(round(333 / float(timestamp), 2))+"it/s]", end="\r")
                 sys.stdout.flush()  # Ensures the output is flushed (especially important for buffered I/O)
             else:
-                print(f"     {to_print_bar * progress}", end='\r')
+                print(f"{to_print_bar * progress}", end='\r')
+            if round(i * 100 / 333) % 10 == 0:
+                sleep(0.05)
             sys.stdout.flush()  # Ensures the output is flushed (especially important for buffered I/O)
-            sleep(0.005)
-            print(f"{nstring}", end='\r')
+            print(f"{nstring}", end="")
             sys.stdout.flush()  # Ensures the output is flushed (especially important for buffered I/O)
-
-
 
             # sys.stdout.flush(False)
-            if (i == len(list(items)) - 1):
-                for x in range (0, progress):
-                    if x % 10:
-                        sleep(0.005)
+            # if (i == len(list(items)) - 1):
+            #     for x in range (0, progress):
+            #         if x % 10 == 0:
+            #             sleep(0.1)
             # return (progress, to_print)
             # print(to_print)
 
         # ntuple = inner()
         # progress, to_print = ntuple[0], ntuple[1]
-        if (i == len(list(items))):
-            print(f"| {len(list(items))}/{len(list(items))} []")
-        end = datetime.now()
-        timestamp = (end - start)
-        timestamp.strftime("%M:%S")
-        print(timestamp)
+            # print(f"| {len(list(items))}/{len(list(items))} []")
+
+        # str(datetime.timedelta(seconds=timestamp))
         # print(f"|{len(list(items))}/{len(list(items))}")
         yield progress
     # The flush() method ensures that the data is immediately written to the output buffer rather than
@@ -81,7 +76,7 @@ def ft_tqdm(items: range) -> None:
 #     maxv = max(list(items))
 #     print(maxv)
 #     for i in range(0, maxv):
-#         i = int(i * 113 / 333)
+#         i = int(i * 100 / 333)
 #         yield i
 
     # i = 0
@@ -96,4 +91,4 @@ def ft_tqdm(items: range) -> None:
     # progressbar upon termination of iteration. If None,
     # will leave only if position is 0.
     # unit=it by default
-# 113 chars
+# 100 chars
