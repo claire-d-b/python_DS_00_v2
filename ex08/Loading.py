@@ -133,7 +133,7 @@ def ft_tqdm(items: range) -> None:
     # or infinite sequences. Here we 100 as a base."""
     size = os.get_terminal_size()
     print(size)
-    cols = (size[0] - 4 - 38)
+    cols = (size[0] - 5 - 38)
     progress = 0
     timestamp = 0
     start = time()
@@ -149,8 +149,7 @@ def ft_tqdm(items: range) -> None:
             if i == (len(list(items)) - 1):
                 print(f"{to_print_bar * (progress + 1)}", end="")
                 sys.stdout.flush()
-
-                print(f"| {len(list(items))}/{len(list(items))}", end="")
+                print(f"| {len(list(items))}/{len(list(items))} ", end="")
                 sys.stdout.flush()
 
                 end = time()
@@ -158,7 +157,7 @@ def ft_tqdm(items: range) -> None:
                 print("[" + str(timedelta(seconds=round(timestamp))) + "<" +
                       str(timedelta(microseconds=(timestamp - round(timestamp
                                                                     ))))
-                      + ", " + str(round(333 / float(timestamp), 2)) +
+                      + ", " + str(round(timestamp * 100 , 2)) +
                       "it/s]", end="\r")
                 sys.stdout.flush()
             else:
