@@ -144,7 +144,7 @@ def ft_tqdm(items: range) -> None:
             nstring = to_print.replace(to_print,
                                        str(round(i * cols / 333))+"%|")
             sys.stdout.flush()  # Ensures the output is flushed
-            # (especially important for buffered I/O) 5 vs 38
+            # (especially important for buffered I/O)
             to_print_bar = "█"
             if i == (len(list(items)) - 1):
                 print(f"{to_print_bar * (progress + 1)}", end="")
