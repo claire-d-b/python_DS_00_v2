@@ -42,10 +42,13 @@ NESTED_MORSE = {
 
 
 def main():
+    """This program takes on argument and uses a dictionary to store
+morse code. It processes only spaces and alnum characters. It outputs
+the argument encoded in morse code."""
     key = 0
     args = []
     kwargs = {}
-    """ catches program argument """
+
     for arg in argv[1:]:
         value = arg
         kwargs[key] = value

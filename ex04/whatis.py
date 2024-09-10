@@ -22,8 +22,9 @@ def main():
             print("I'm Odd")
         else:
             print("I'm Even")
-    except ValueError as e:
+    except ValueError:
         raise AssertionError("argument is not an integer")
+
 
 if __name__ == "__main__":
     try:

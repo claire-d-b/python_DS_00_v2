@@ -3,7 +3,7 @@ from ft_filter import ft_filter
 
 
 def is_chars(chars: any):
-    """ counts occurences of chars """
+    """Count occurences of chars"""
     try:
         str(chars)
         return True
@@ -12,7 +12,7 @@ def is_chars(chars: any):
 
 
 def is_digit(chars: any):
-    """ count occurences of digits """
+    """Count occurences of digits"""
     try:
         int(chars)
         return True
@@ -21,7 +21,9 @@ def is_digit(chars: any):
 
 
 def main():
-    """ catches program argument """
+    """Program that outputs a list of words from S that have a length\
+greater than N. This is performed by custom filter function.
+Builtin python filter result and docstring is shown for comparison."""
     args = argv[1:]
 
     try:
@@ -38,10 +40,12 @@ def main():
             return
     words = args[0].split()
     n = int(args[1])
-    print(ft_filter(lambda word : len(word) >= n, words))
-    print(filter(lambda word : len(word) >= n, words))
-    print(list(ft_filter(lambda word : len(word) >= n, words)))
-    print(list(filter(lambda word : len(word) >= n, words)))
+    print(ft_filter(lambda word: len(word) >= n, words))
+    print(filter(lambda word: len(word) >= n, words))
+    print(list(ft_filter(lambda word: len(word) >= n, words)))
+    print(list(filter(lambda word: len(word) >= n, words)))
+    print(ft_filter.__doc__)
+    print(filter.__doc__)
 
 
 if __name__ == "__main__":

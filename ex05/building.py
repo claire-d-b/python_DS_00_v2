@@ -2,6 +2,9 @@ from sys import argv
 
 
 def main():
+    """Program that takes a string as parameter, either from command line
+    or from a prompt if no argument is provided, and counts occurence of
+    various ascii chars."""
     punctuation = {'.', ',', ';', ':', '!', '?', '\'', '"', '(', ')',
                    '[', ']', '{', '}', '-', '_', '/', '\\', '|', '@',
                    '#', '$', '%', '^', '&', '*', '<', '>', '~', '`'}
@@ -28,7 +31,7 @@ def main():
 # but this character is not seen by the running program, it is caught by
 # the operating system which in turn signals EOF to the process.
 
-    """ if there is no command-line arg, prompt for user input """
+    # if there is no command-line arg, prompt for user input
     if len(argv[1:]) == 0:
         arg = ''
         while True:
@@ -43,13 +46,13 @@ def main():
                 # exception raises when ctrl + C
                 break
     else:
-        """ catches program last argument """
+        # catches program last argument
         arg = argv[-1]
 
     print("The text contains " + str(len(arg) + carriage_ret) +
           " characters: ")
 
-    """ count occurences of below char ranges """
+    # count occurences of below char ranges
     i = 0
     for item in arg:
         if item.isupper():
