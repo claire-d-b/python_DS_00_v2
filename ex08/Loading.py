@@ -132,7 +132,6 @@ def ft_tqdm(items: range) -> None:
     # - Useful for memory-efficient, stateful iteration over large
     # or infinite sequences. Here we 100 as a base."""
     size = os.get_terminal_size()
-    print(size)
     cols = (size[0] - 5 - 38)
     progress = 0
     timestamp = 0
@@ -157,7 +156,7 @@ def ft_tqdm(items: range) -> None:
                 print("[" + str(timedelta(seconds=round(timestamp))) + "<" +
                       str(timedelta(microseconds=(timestamp - round(timestamp
                                                                     ))))
-                      + ", " + str(round(timestamp * 100, 2)) +
+                      + ", " + str(round(len(list(items)) / timestamp, 2)) +
                       "it/s]", end="\r")
                 sys.stdout.flush()
             else:
