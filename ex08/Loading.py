@@ -157,7 +157,7 @@ def ft_tqdm(items: range) -> None:
                 print("[" + str(timedelta(seconds=round(timestamp))) + "<" +
                       str(timedelta(microseconds=(timestamp - round(timestamp
                                                                     ))))
-                      + ", " + str(round(timestamp * 100 , 2)) +
+                      + ", " + str(round(timestamp * 100, 2)) +
                       "it/s]", end="\r")
                 sys.stdout.flush()
             else:
