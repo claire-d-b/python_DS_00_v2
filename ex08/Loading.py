@@ -1,4 +1,5 @@
 import sys
+import os
 from datetime import timedelta
 from time import sleep, time
 
@@ -130,17 +131,20 @@ def ft_tqdm(items: range) -> None:
     # - The function’s state is saved between calls.
     # - Useful for memory-efficient, stateful iteration over large
     # or infinite sequences. Here we 100 as a base."""
+    size = os.get_terminal_size()
+    print(size)
+    cols = (size[0] - 5 - 38)
     progress = 0
     timestamp = 0
     start = time()
     if len(list(items)):
         to_print = ""
         for i in range(0, len(list(items))):
-            progress = int(i * 100 / 333)
+            progress = int(i * cols / 333)
             nstring = to_print.replace(to_print,
-                                       str(round(i * 100 / 333))+"%|")
+                                       str(round(i * cols / 333))+"%|")
             sys.stdout.flush()  # Ensures the output is flushed
-            # (especially important for buffered I/O)
+            # (especially important for buffered I/O) 5 vs 38
             to_print_bar = "█"
             if i == (len(list(items)) - 1):
                 print(f"{to_print_bar * (progress + 1)}", end="")
@@ -159,7 +163,7 @@ def ft_tqdm(items: range) -> None:
                 sys.stdout.flush()
             else:
                 print(f"{to_print_bar * progress}", end='\r')
-            if round(i * 100 / 333) % 10 == 0:
+            if round(i * cols / 333) % 10 == 0:
                 sleep(0.05)
             sys.stdout.flush()
             print(f"{nstring}", end="")

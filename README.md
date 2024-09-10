@@ -54,7 +54,6 @@ source venv/bin/activate
 
 pip install flake8
 alias norminette=flake8
-
 rm -rf ft_package/**pycache**
 rm -rf ft_package.egg-info
 rm -rf build
