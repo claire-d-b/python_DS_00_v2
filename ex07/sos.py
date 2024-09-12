@@ -60,7 +60,7 @@ the argument encoded in morse code."""
         for arg in args:
             for letter in arg:
                 assert letter.isalnum()
-    except AssertionError as e:
+    except AssertionError:
         raise AssertionError("the arguments are bad")
     for arg in args:
         for letter in arg:

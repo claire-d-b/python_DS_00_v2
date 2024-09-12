@@ -20,9 +20,11 @@ if __name__ == "__main__":
 # 100%|██████████| 100/100 [00:10<00:00,  9.90it/s]
 
 # 100%: The loop is fully completed.
-# 100/100: Indicates 100 iterations were processed out of 100 total.
+# 100/100: Indicates 100 iterations were processed
+# out of 100 total.
 # 00:10: Elapsed time of 10 seconds.
-# 9.90it/s: The speed of processing, showing approximately 9.90 iterations per second.
+# 9.90it/s: The speed of processing, showing approximately
+# 9.90 iterations per second.
 
 # Calculate total time elapsed and iterations per second
 # elapsed_time = end_time - start_time
