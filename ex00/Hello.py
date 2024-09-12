@@ -1,7 +1,18 @@
-ft_list = ["Hello", "World!"]
-ft_tuple = ("Hello", "France!")
-ft_set = {"Hello", "Paris!"}
-ft_dict = {"Hello": "42Paris!"}
+ft_list = ["Hello", "tata!"]
+ft_tuple = ("Hello", "toto!")
+ft_set = {"Hello", "tutu!"}
+ft_dict = {"Hello" : "titi!"}
+
+# TypeError: 'tuple' object does not support item assignment
+# TypeError: 'set' object does not support item assignment
+# TypeError: 'set' object is not subscriptable
+# => Unlike lists or tuples, sets are unordered collections of unique elements,
+# so they don't support indexing or slicing.
+
+ft_list[1] = "World!"
+ft_tuple = tuple(list([ft_tuple[0], "France!"]))
+ft_set = set(list(["Hello", "Paris!"]))
+ft_dict["Hello"] = "42Paris!"
 
 print(ft_list)
 print(ft_tuple)

@@ -27,17 +27,15 @@ Builtin python filter result and docstring is shown for comparison."""
     args = argv[1:]
 
     try:
-        assert len(args) == 2, "the arguments are bad"
-    except AssertionError as e:
-        print(f"AssertionError: {e}")
-        return
+        assert len(args) == 2
+    except AssertionError:
+        raise AssertionError("the arguments are bad")
     else:
         try:
-            assert is_chars(args[0]), "the arguments are bad"
-            assert is_digit(args[1]), "the arguments are bad"
-        except AssertionError as e:
-            print(f"AssertionError: {e}")
-            return
+            assert is_chars(args[0])
+            assert is_digit(args[1])
+        except AssertionError:
+            raise AssertionError("the arguments are bad")
     words = args[0].split()
     n = int(args[1])
     print(ft_filter(lambda word: len(word) >= n, words))
@@ -49,4 +47,7 @@ Builtin python filter result and docstring is shown for comparison."""
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except AssertionError as e:
+        print(f"AssertionError: {e}")

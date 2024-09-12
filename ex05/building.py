@@ -12,76 +12,78 @@ def main():
     spaces = {'\t', '\n', '\r', '\v', '\f', ' ', ''}
 
     try:
-        len(argv[1:]) == 0 or len(argv[1:]) == 1, "Wrong number of arguments"
-    except AssertionError as e:
-        print(f"AssertionError: {e}")
-
-    carriage_ret = 0
-
-
-# CtrlC tells the terminal to send a SIGINT to the current foreground process,
-# which by default translates into terminating the application.
-# CtrlD tells the terminal that it should register a EOF on standard input,
-# which bash interprets as a desire to exit.
-# EOF is not a character (in most modern operating systems).
-# It is simply a condition that applies to a file stream when the
-# end of the stream is reached.
-# The confusion arises because a user may signal EOF for console
-# input by typing a special character (e.g Control-D in Unix, Linux, et al),
-# but this character is not seen by the running program, it is caught by
-# the operating system which in turn signals EOF to the process.
-
-    # if there is no command-line arg, prompt for user input
-    if len(argv[1:]) == 0:
-        arg = ''
-        while True:
-            try:
-                arg = input()
-            except EOFError:
-                # EOF reached with ctrl + D
-                # we need to add a space for the carriage return
-                carriage_ret = 1
-                break
-            except KeyboardInterrupt:
-                # exception raises when ctrl + C
-                break
+        assert len(argv[1:]) <= 1
+    except AssertionError:
+        raise AssertionError("Wrong number of arguments")
     else:
-        # catches program last argument
-        arg = argv[-1]
+        carriage_ret = 0
 
-    print("The text contains " + str(len(arg) + carriage_ret) +
-          " characters: ")
+        # CtrlC tells the terminal to send a SIGINT to the current foreground process,
+        # which by default translates into terminating the application.
+        # CtrlD tells the terminal that it should register a EOF on standard input,
+        # which bash interprets as a desire to exit.
+        # EOF is not a character (in most modern operating systems).
+        # It is simply a condition that applies to a file stream when the
+        # end of the stream is reached.
+        # The confusion arises because a user may signal EOF for console
+        # input by typing a special character (e.g Control-D in Unix, Linux, et al),
+        # but this character is not seen by the running program, it is caught by
+        # the operating system which in turn signals EOF to the process.
 
-    # count occurences of below char ranges
-    i = 0
-    for item in arg:
-        if item.isupper():
-            i += 1
-    print(str(i) + " upper letters")
-    i = 0
-    for item in arg:
-        if item.islower():
-            i += 1
-    print(str(i) + " lower letters")
-    i = 0
-    for item in arg:
-        if item in punctuation:
-            i += 1
-    print(str(i) + " punctuation marks")
-    i = 0
-    for item in arg:
-        if item in spaces:
-            i += 1 + carriage_ret
-    print(str(i) + " spaces")
-    i = 0
-    for item in arg:
-        if item.isdigit():
-            i += 1
-    print(str(i) + " digits")
+        # if there is no command-line arg, prompt for user input
+        if len(argv[1:]) == 0:
+            arg = ''
+            while True:
+                try:
+                    arg = input()
+                except EOFError:
+                    # EOF reached with ctrl + D
+                    # we need to add a space for the carriage return
+                    carriage_ret = 1
+                    break
+                except KeyboardInterrupt:
+                    # exception raises when ctrl + C
+                    break
+        else:
+            # catches program last argument
+            arg = argv[-1]
+
+        print("The text contains " + str(len(arg) + carriage_ret) +
+            " characters: ")
+
+        # count occurences of below char ranges
+        i = 0
+        for item in arg:
+            if item.isupper():
+                i += 1
+        print(str(i) + " upper letters")
+        i = 0
+        for item in arg:
+            if item.islower():
+                i += 1
+        print(str(i) + " lower letters")
+        i = 0
+        for item in arg:
+            if item in punctuation:
+                i += 1
+        print(str(i) + " punctuation marks")
+        i = 0
+        for item in arg:
+            if item in spaces:
+                i += 1 + carriage_ret
+        print(str(i) + " spaces")
+        i = 0
+        for item in arg:
+            if item.isdigit():
+                i += 1
+        print(str(i) + " digits")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except AssertionError as e:
+        print(f"AssertionError: {e}")
 
 # In Python, __name__ is a special variable assigned to the name
 # of the Python module by the interpreter. If your module is invoked as

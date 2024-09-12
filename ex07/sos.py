@@ -56,20 +56,22 @@ the argument encoded in morse code."""
         key += 1
 
     try:
-        assert len(args) == 1, "the arguments are bad"
+        assert len(args) == 1
         for arg in args:
             for letter in arg:
-                assert letter.isalnum(), "the arguments are bad"
+                assert letter.isalnum()
     except AssertionError as e:
-        print(f"AssertionError: {e}")
-        return
+        raise AssertionError("the arguments are bad")
     for arg in args:
         for letter in arg:
             if letter.isdigit():
-                print(NESTED_MORSE[letter], end="")
+                print(NESTED_MORSE[letter], end=" ")
             else:
-                print(NESTED_MORSE[letter.upper()], end="")
+                print(NESTED_MORSE[letter.upper()], end=" ")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except AssertionError as e:
+        print(f"AssertionError: {e}")
